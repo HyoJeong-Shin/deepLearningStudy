@@ -9,3 +9,6 @@ model = tf.keras.models.Sequential([
     tf.keras.layers.Dense(128, activation='tanh'),   # layer2
     tf.keras.layers.Dense(1, activation='sigmoid')      # layer3      # 마지막 출력 레이어  # 예측결과가 0~1사이의 확률이려면 활성함수 sigmoid로 설정
 ])
+
+# 2. model compile하기
+model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])  # 0과 1사이 분류/확률문제에 쓰는 loss함수 : binary_crossentropy
