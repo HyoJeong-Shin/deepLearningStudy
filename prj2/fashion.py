@@ -16,10 +16,10 @@ import matplotlib.pyplot as plt
 class_names = ['T-shirt/top', 'Trouser', 'Pullover', 'Dress', 'Coat', 'Sandal', 'Shirt', 'Sneaker', 'Bag', 'Ankleboot'] 
 
 # 해당하는 이미지 띄우기
-plt.imshow( trainX[0] )
-plt.gray()      # 흑백으로 출력하기
-plt.colorbar()  # 어떤 색상인지 수치화해서 보여줌
-plt.show()
+#plt.imshow( trainX[0] )
+#plt.gray()      # 흑백으로 출력하기
+#plt.colorbar()  # 어떤 색상인지 수치화해서 보여줌
+#plt.show()
 
 
 # 1. 모델 만들기
