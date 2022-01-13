@@ -22,16 +22,14 @@ y데이터 = data['admit'].values
 
 x데이터 = []
 
-
 # i : 행번호 rows : 각 행의 데이터들  iterrows() : dataframe의 data를 한 행씩 출력
 for i, rows in data.iterrows():
-    print(rows['gre'])
+    x데이터.append([ rows['gre'], rows['gpa'], rows['rank'] ])
+    
 
-exit()
-
-
+import numpy as np
 import tensorflow as tf
-# 대학원 붙을 확률 계산
+# 대학원 붙을 확률 계산  1. 모델 만들고 -> 2. 데이터 집어넣고 학습 -> 3. 새로운 데이터 예측
 
 # 1. 딥러닝 모델 디자인
 # Sequential : 신경망 레이어 만들어줌
@@ -45,9 +43,19 @@ model = tf.keras.models.Sequential([
 # 2. model compile하기
 model.compile(optimizer='adam', loss='binary_crossentropy', metrics=['accuracy'])  # 0과 1사이 분류/확률문제에 쓰는 loss함수 : binary_crossentropy
 
-# 3. model 학습(fit) 시키기
+# 3. model 학습(fit) 시키기  =  w값 최적화
 # x에는 학습데이터, y는 실제정답데이터, epochs : 몇번 학습을 시킬지
-model.fit( x데이터, y데이터, epochs=10)
+model.fit( np.array(x데이터), np.array(y데이터), epochs=1000)     # 데이터를 list 그대로가 아닌, numpy array 또는 tf tensor로 변환해야 학습 가능
 
 # inputData : x = [ [데이터1], [데이터2], [데이터3] ...]    ex) [[380, 3.21, 3], [660, 3.67, 3], [], [] ...]
 # label(답안) : y = [정답1, 정답2, 정답3 ...]   ex) [0, 1, 1, 1 ...]
+
+# 학습시킨 후 나오는 결과값 설명
+# loss : 예측값과 실제값의 차이값(손실값) => 적어질 수록 학습 잘 되고 있는 것
+# accuracy : 예측값이 실제값과 얼마나 정확히 맞는지 평가 => 높을수록 좋음
+
+
+# 4. 학습시킨 모델로 예측하기
+# gre성적 750, 학점3.7, rank4인 사람과 400, 2.2, 1인 사람의 대학원 합격확률 예측
+예측값 = model.predict( [ [750, 3.7, 4], [400, 2.2, 1]])
+print(예측값)       # 출력값 : [[0.85545945] [0.05677262]] => 85%, 5% 확률로 예측함
