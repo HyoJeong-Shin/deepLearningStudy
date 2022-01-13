@@ -27,7 +27,7 @@ plt.show()
 model = tf.keras.Sequential([
     tf.keras.layers.Dense(128, input_shape=(28, 28), activation="relu"),      # relu : 음수를 다 0으로 만듦 => convolution layer에서 자주 사용
     tf.keras.layers.Dense(64, activation="relu"),
-    tf.keras.layers.Flatten(),                          # 행렬을 1차원으로 압축해주는 Flatten 레이어
+    tf.keras.layers.Flatten(),                          # 다차원 행렬을 1차원으로 압축해주는 Flatten 레이어
     tf.keras.layers.Dense(10, activation="softmax")     # sigmoid : 결과를 0~1로 압축 => binary 예측문제에 사용(대학원 붙는다/안붙는다), 마지막 노드 갯수는 1개   # softmax : 결과를 0~1로 압축 => 카테고리 예측문제에 사용, 예측한 10개 확률을 다 더하면 1나옴
 ])
 
